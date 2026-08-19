@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>छठ महापर्व - गीत प्लेलिस्ट</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#141a38;
+    --sky-mid:#3d2b56;
+    --sky-low:#7a3b3f;
+    --sun:#ffb347;
+    --sun-core:#fff1c4;
+    --river:#1d4e5c;
+    --river-light:#2c6f7d;
+    --gold:#ffd166;
+    --vermilion:#c1440e;
+    --card-bg:rgba(15,16,30,0.55);
+    --text-warm:#fdf3e2;
+    --text-muted:#c9b8a8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:'Noto Sans Devanagari','Tiro Devanagari Hindi',sans-serif;
+    color:var(--text-warm);
+    min-height:100vh;
+    overflow-x:hidden;
+    background:#141a38;
+    position:relative;
+  }
+
+  /* ---------- BACKGROUND SCENE (real Chhath Puja photos) ---------- */
+  .scene{
+    position:fixed; inset:0; z-index:0; background:#0d0e1c;
+  }
+  .bg-photo{
+    position:absolute; inset:0;
+    background-size:cover;
+    opacity:0; animation:crossfade 16s infinite;
+    filter:saturate(1.05) contrast(1.03);
+  }
+  .bg-photo.p1{animation-delay:0s; background-position:center 30%;}
+  .bg-photo.p2{animation-delay:-8s; background-position:center 45%;}
+  @keyframes crossfade{
+    0%{opacity:0;} 6%{opacity:1;} 44%{opacity:1;} 50%{opacity:0;} 100%{opacity:0;}
+  }
+  .scene-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(10,10,20,.35) 0%, rgba(10,10,20,.25) 40%, rgba(10,10,20,.55) 75%, rgba(6,6,14,.85) 100%);
+  }
+  .scene-vignette{
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,.55) 100%);
+  }
+  .stars{display:none;}
+
+  .diya{position:absolute; bottom:0; width:26px; height:16px; animation:bob 4s ease-in-out infinite;}
+  .diya .flame{position:absolute; left:50%; top:-10px; width:6px; height:12px; transform:translateX(-50%); background:radial-gradient(ellipse at bottom, #fff6cf, var(--gold) 55%, rgba(255,209,102,0) 90%); border-radius:50% 50% 50% 50% / 60% 60% 40% 40%; animation:flicker 1.6s ease-in-out infinite;}
+  .diya .bowl{position:absolute; bottom:0; width:100%; height:10px; background:linear-gradient(180deg,#7a4a2b,#4a2a17); border-radius:0 0 50% 50% / 0 0 70% 70%;}
+  .diya .glow{position:absolute; left:50%; top:-4px; width:34px; height:34px; transform:translate(-50%,-50%); background:radial-gradient(circle, rgba(255,209,102,.5), rgba(255,209,102,0) 70%); border-radius:50%;}
+  @keyframes bob{0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);}}
+  @keyframes flicker{0%,100%{opacity:1; transform:translateX(-50%) scaleY(1);} 50%{opacity:.75; transform:translateX(-50%) scaleY(.85);}}
+
+  /* ---------- LAYOUT ---------- */
+  .wrap{position:relative; z-index:2; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:6vh 5vw 8vh;}
+
+  header{text-align:center; margin-bottom:6vh;}
+  .eyebrow{font-family:'JetBrains Mono',monospace; letter-spacing:.35em; font-size:.7rem; text-transform:uppercase; color:var(--gold); opacity:.85;}
+  h1{font-family:'Yatra One',cursive; font-size:clamp(2.4rem,6vw,4.2rem); font-weight:400; margin:.3em 0 .15em; text-shadow:0 2px 20px rgba(0,0,0,.4); background:linear-gradient(90deg,#ffe9b8,var(--gold) 45%,#ffb347); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .sub{font-size:1.05rem; color:var(--text-muted); font-family:'Tiro Devanagari Hindi',serif;}
+
+  .player-card{
+    width:100%; max-width:480px;
+    background:linear-gradient(180deg, rgba(20,22,42,.88), rgba(12,13,26,.92));
+    backdrop-filter:blur(18px) saturate(140%);
+    -webkit-backdrop-filter:blur(18px) saturate(140%);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;
+    padding:1.1rem 1.2rem 1.3rem;
+    box-shadow:0 25px 60px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06);
+  }
+
+  .widget-top{display:flex; align-items:center; gap:.8rem; margin-bottom:1rem;}
+  .thumb{
+    width:46px; height:46px; border-radius:12px; flex-shrink:0;
+    background:linear-gradient(135deg, var(--vermilion), var(--gold));
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 14px rgba(255,179,71,.3);
+  }
+  .thumb svg{width:24px; height:24px; fill:rgba(20,10,5,.75);}
+  .thumb.spin svg{animation:spin-disc 6s linear infinite;}
+  @keyframes spin-disc{to{transform:rotate(360deg);}}
+  .np-info{min-width:0; flex:1;}
+  .np-title{font-size:.98rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text-warm);}
+  .np-label{font-family:'Tiro Devanagari Hindi',serif; font-size:.76rem; color:var(--text-muted); margin-top:.15rem;}
+  .np-empty{color:var(--text-muted); font-size:.92rem;}
+  .heart-btn{width:34px; height:34px; flex-shrink:0; color:var(--text-muted);}
+  .heart-btn svg{width:17px; height:17px;}
+  .heart-btn.liked{color:#ff5d6c;}
+  .minimize-btn{width:30px; height:30px; flex-shrink:0; color:var(--text-muted);}
+  .minimize-btn svg{width:15px; height:15px;}
+
+  .player-card.hidden-back{display:none;}
+  .mini-player{
+    display:none; position:fixed; right:20px; bottom:22px; z-index:60;
+    align-items:center; gap:.5rem; padding:.5rem .9rem .5rem .5rem;
+    background:linear-gradient(180deg, rgba(20,22,42,.92), rgba(12,13,26,.95));
+    border:1px solid rgba(255,209,102,.25); border-radius:999px; cursor:pointer;
+    box-shadow:0 12px 30px rgba(0,0,0,.5);
+  }
+  .mini-player.show{display:flex;}
+  .mini-thumb{
+    width:34px; height:34px; border-radius:50%; flex-shrink:0;
+    background:linear-gradient(135deg, var(--vermilion), var(--gold));
+    display:flex; align-items:center; justify-content:center;
+    animation:spin-disc 6s linear infinite;
+  }
+  .mini-thumb svg{width:18px; height:18px; fill:rgba(20,10,5,.75);}
+  .mini-play-icon{color:var(--gold);}
+  .mini-play-icon svg{width:18px; height:18px; fill:currentColor;}
+
+
+
+  .progress-row{display:flex; align-items:center; gap:.55rem; margin:.2rem 0 1rem; font-family:'JetBrains Mono',monospace; font-size:.68rem; color:var(--text-muted);}
+  input[type=range]{-webkit-appearance:none; appearance:none; flex:1; height:4px; border-radius:3px; background:rgba(255,255,255,.15); outline:none;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:12px; height:12px; border-radius:50%; background:var(--gold); box-shadow:0 0 8px rgba(255,209,102,.7); cursor:pointer;}
+  input[type=range]::-moz-range-thumb{width:12px; height:12px; border-radius:50%; background:var(--gold); border:none; cursor:pointer;}
+
+  .controls{display:flex; align-items:center; justify-content:center; gap:.55rem; margin-bottom:.4rem;}
+  .ctrl-btn{
+    background:transparent; border:none; color:var(--text-warm); cursor:pointer;
+    width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    transition:background .2s, transform .15s;
+  }
+  .ctrl-btn:hover{background:rgba(255,209,102,.12); transform:translateY(-1px);}
+  .ctrl-btn svg{width:16px; height:16px; fill:currentColor;}
+  .play-btn{
+    width:44px; height:44px;
+    background:linear-gradient(135deg, var(--gold), var(--vermilion));
+    box-shadow:0 6px 18px rgba(193,68,14,.4);
+  }
+  .play-btn:hover{transform:translateY(-1px) scale(1.04); background:linear-gradient(135deg, var(--gold), var(--vermilion));}
+  .play-btn svg{width:19px; height:19px;}
+  .toggle-active{color:var(--gold);}
+
+
+  .volume-row{display:flex; align-items:center; gap:.5rem; margin-bottom:1.4rem; padding:0 .2rem;}
+  .vol-btn{width:34px; height:34px; flex-shrink:0;}
+  .vol-btn svg{width:17px; height:17px;}
+  #volSlider{-webkit-appearance:none; appearance:none; flex:1; height:5px; border-radius:3px; background:rgba(255,255,255,.15); outline:none;}
+  #volSlider::-webkit-slider-thumb{-webkit-appearance:none; width:14px; height:14px; border-radius:50%; background:var(--gold); box-shadow:0 0 8px rgba(255,209,102,.7); cursor:pointer;}
+  #volSlider::-moz-range-thumb{width:14px; height:14px; border-radius:50%; background:var(--gold); border:none; cursor:pointer;}
+  .vol-label{font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--text-muted); width:3.6em; text-align:right; flex-shrink:0;}
+  .auto-btn{color:var(--text-muted);}
+  .auto-btn.active{color:var(--gold); background:rgba(255,209,102,.14);}
+  .auto-btn svg{transition:transform .3s;}
+  .auto-btn.active svg{filter:drop-shadow(0 0 4px rgba(255,209,102,.7));}
+
+  .add-row{display:flex; gap:.5rem; margin-bottom:1rem;}
+  .file-label{
+    flex:1; text-align:center; padding:.7rem 1rem; border-radius:10px; cursor:pointer;
+    border:1px dashed rgba(255,209,102,.4); color:var(--gold); font-size:.85rem;
+    transition:background .2s, border-color .2s;
+  }
+  .file-label:hover{background:rgba(255,209,102,.08); border-color:var(--gold);}
+  input[type=file]{display:none;}
+
+  .playlist{list-style:none; max-height:260px; overflow-y:auto; border-top:1px solid rgba(255,255,255,.08); padding-top:.6rem;}
+  .playlist::-webkit-scrollbar{width:6px;}
+  .playlist::-webkit-scrollbar-thumb{background:rgba(255,209,102,.35); border-radius:3px;}
+  .playlist li{
+    display:flex; align-items:center; gap:.7rem; padding:.6rem .5rem; border-radius:10px; cursor:pointer;
+    font-size:.92rem; transition:background .15s;
+  }
+  .playlist li:hover{background:rgba(255,255,255,.06);}
+  .playlist li.active{background:rgba(255,209,102,.14); color:var(--gold);}
+  .track-num{font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--text-muted); width:1.6em; flex-shrink:0;}
+  .track-name{flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .remove-btn{background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:1rem; opacity:.5; padding:.2em .4em;}
+  .lock-icon{font-size:.8rem; opacity:.55; padding:.2em .4em; flex-shrink:0;}
+  .remove-btn:hover{opacity:1; color:var(--vermilion);}
+  .empty-msg{text-align:center; color:var(--text-muted); font-size:.88rem; padding:1.2rem 0;}
+
+  footer{margin-top:3rem; text-align:center; font-size:.8rem; color:var(--text-muted); max-width:560px; line-height:1.6;}
+  footer b{color:var(--gold);}
+
+  @media (max-width:480px){
+    .player-card{padding:1.4rem 1rem;}
+    .controls{gap:.7rem;}
+  }
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="bg-photo p1" id="bgPhoto1"></div>
+  <div class="bg-photo p2" id="bgPhoto2"></div>
+  <div class="scene-overlay"></div>
+  <div class="scene-vignette"></div>
+  <div id="diyas"></div>
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">बिहार का महापर्व</div>
+    <h1>छठ गीत प्लेलिस्ट</h1>
+    <div class="sub">छठी मैया की भक्ति में डूबिए — अपने पसंदीदा छठ गीत यहाँ बजाएँ</div>
+  </header>
+
+  <div class="player-card" id="playerCard">
+    <div class="widget-top">
+      <div class="thumb" id="disc"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 15a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/></svg></div>
+      <div class="np-info">
+        <div class="np-title" id="npTitle"><span class="np-empty">कोई गीत चयनित नहीं</span></div>
+        <div class="np-label">छठ गीत · अभी बज रहा है</div>
+      </div>
+      <button class="ctrl-btn heart-btn" id="heartBtn" title="पसंद करें">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-6.7-4.35-9.3-8.1C1 10.2 1.6 6.8 4.6 5.3 7 4.1 9.6 5 12 7.5c2.4-2.5 5-3.4 7.4-2.2 3 1.5 3.6 4.9 1.9 7.6C18.7 16.65 12 21 12 21z"/></svg>
+      </button>
+      <button class="ctrl-btn minimize-btn" id="minimizeBtn" title="प्लेयर को पीछे भेजें">
+        <svg viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z"/></svg>
+      </button>
+    </div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="shuffleBtn" title="शफल">
+        <svg viewBox="0 0 24 24"><path d="M17 3l4 4-4 4M3 7h6l1.5 2.5M21 17l-4 4-4-4M3 17h6a2 2 0 0 0 1.7-1L14 8a2 2 0 0 1 1.7-1H21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="ctrl-btn" id="prevBtn" title="पिछला">
+        <svg viewBox="0 0 24 24"><path d="M6 4h2v16H6zM20 5v14l-11-7z"/></svg>
+      </button>
+      <button class="ctrl-btn play-btn" id="playBtn" title="चलाएँ / रोकें">
+        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <button class="ctrl-btn" id="nextBtn" title="अगला">
+        <svg viewBox="0 0 24 24"><path d="M16 4h2v16h-2zM4 5l11 7-11 7z"/></svg>
+      </button>
+      <button class="ctrl-btn" id="repeatBtn" title="दोहराएँ">
+        <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <div class="progress-row">
+      <span id="curTime">0:00</span>
+      <input type="range" id="seek" value="0" min="0" max="100" step="0.1">
+      <span id="durTime">0:00</span>
+    </div>
+
+    <div class="volume-row">
+      <button class="ctrl-btn vol-btn" id="volDownBtn" title="आवाज़ कम करें">
+        <svg viewBox="0 0 24 24"><path d="M3 10v4h4l5 5V5L7 10H3z"/></svg>
+      </button>
+      <input type="range" id="volSlider" min="0" max="200" value="115" title="आवाज़ / वॉल्यूम">
+      <button class="ctrl-btn vol-btn" id="volUpBtn" title="आवाज़ बढ़ाएँ">
+        <svg viewBox="0 0 24 24"><path d="M3 10v4h4l5 5V5L7 10H3zm11.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>
+      </button>
+      <span class="vol-label" id="volLabel">115%</span>
+      <button class="ctrl-btn vol-btn auto-btn active" id="autoVolBtn" title="सबसे अच्छी आवाज़ अपने-आप सेट करें">
+        <svg viewBox="0 0 24 24"><path d="M12 2l1.6 4.6L18 8l-4.4 1.4L12 14l-1.6-4.6L6 8l4.4-1.4z"/></svg>
+      </button>
+    </div>
+
+    <div class="add-row">
+      <label class="file-label" for="fileInput">+ अपने गाने जोड़ें (MP3 / MP4 फ़ाइल चुनें, एक साथ कई)</label>
+      <input type="file" id="fileInput" accept="audio/*,video/mp4,audio/mp4,.mp4,.m4a,.mp3" multiple>
+    </div>
+
+    <ul class="playlist" id="playlist">
+      <li class="empty-msg" id="emptyMsg">अभी प्लेलिस्ट खाली है — ऊपर से अपने छठ गीत MP3 फ़ाइलें जोड़ें, फिर वे यहाँ बजने लगेंगी।</li>
+    </ul>
+  </div>
+
+  <button class="mini-player" id="miniPlayer" title="प्लेयर वापस खोलें">
+    <span class="mini-thumb"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 15a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/></svg></span>
+    <span class="mini-play-icon" id="miniPlayIcon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+  </button>
+
+  <footer>
+    यह प्लेयर आपके अपने डिवाइस से MP3/MP4 गाने जोड़कर उन्हें एक के बाद एक बजाता है — गाने कहीं अपलोड नहीं होते, सब कुछ आपके ब्राउज़र में ही चलता है।
+  </footer>
+</div>
+
+<video id="audio" style="display:none" playsinline></video>
